@@ -1,2 +1,10 @@
 INFORMAÇOES DO BANCO DE DADOS
 
+dbname: daotest
+table: cars
+
+colunas:
+id
+brand
+km
+color
