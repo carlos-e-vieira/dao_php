@@ -11,7 +11,7 @@ class CarDAO implements CarDAOInterface
         $this->conn = $conn;
     }
 
-    public function create(Car $car)
+    public function create(Car $car): void
     {
         $query = 'INSERT INTO cars (brand, km, color) VALUES (:brand, :km, :color)';
 
@@ -28,8 +28,27 @@ class CarDAO implements CarDAOInterface
         }
     }
 
-    public function findAll()
+    public function findAll(): array
     {
+        $cars = [];
 
+        $query = "SELECT * FROM cars";
+
+        $stmt = $this->conn->prepare($query);
+
+        $data = $stmt->fetchAll();
+
+        foreach ($data as $item) {
+            $car = new Car();
+
+            $car->getId($item['id']);
+            $car->getBrand($item['brand']);
+            $car->getKm($item['km']);
+            $car->getColor($item['color']);
+
+            $cars[] = $car;
+        }
+
+        return $cars;
     }
 }

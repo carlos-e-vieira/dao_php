@@ -52,6 +52,6 @@ class Car
 
 interface CarDAOInterface
 {
-    public function create(Car $car);
-    public function findAll();
+    public function create(Car $car): void;
+    public function findAll(): array;
 }
